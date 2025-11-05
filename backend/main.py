@@ -14,17 +14,11 @@ load_dotenv()
 
 app = FastAPI(title="Auto Form Filling Agent", version="1.0.0")
 
-# Add environment-based CORS configuration
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
-if ALLOWED_ORIGINS == ["*"]:
-    CORS_CREDENTIALS = False
-else:
-    CORS_CREDENTIALS = True
-
+# Add CORS configuration for Netlify frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
-    allow_credentials=CORS_CREDENTIALS,
+    allow_origins=["https://automatic-job-application-filler.netlify.app", "http://localhost:3000"],
+    allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
