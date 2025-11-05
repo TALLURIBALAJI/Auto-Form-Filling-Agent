@@ -15,9 +15,9 @@ echo "🏢 Account ID: $AWS_ACCOUNT_ID"
 
 echo "🚀 Starting AWS ECS Deployment..."
 
-# 1. Build and push Docker image
-echo "📦 Building Docker image..."
-docker build -f backend/Dockerfile.prod -t $ECR_REPO:latest ./backend
+# 1. Build and push Docker image for linux/amd64
+echo "📦 Building Docker image for linux/amd64..."
+docker build --platform linux/amd64 -f backend/Dockerfile.prod -t $ECR_REPO:latest ./backend
 
 echo "🔐 Logging into ECR..."
 aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com

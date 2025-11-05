@@ -101,6 +101,10 @@ aws ecs create-cluster --cluster-name auto-form-filler-cluster --region $AWS_REG
 echo "📊 Creating CloudWatch log group..."
 aws logs create-log-group --log-group-name /ecs/auto-form-filler --region $AWS_REGION || echo "Log group already exists"
 
+# Setup IAM roles and permissions
+echo "🔐 Setting up IAM roles..."
+./aws/fix-iam-permissions.sh
+
 echo "✅ Infrastructure setup completed!"
 echo "📝 Task definition generated with your AWS account details"
-echo "🚀 Run './aws/deploy.sh' to deploy the application"
+echo "🚀 Run './aws/deploy-demo.sh' to deploy the application"

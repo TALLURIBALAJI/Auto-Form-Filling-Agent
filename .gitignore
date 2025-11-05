@@ -57,5 +57,5 @@ test_*.py
 *_test.py
 
 # AWS
-aws/task-definition.json
+aws/task-definition*.json
 .aws/
