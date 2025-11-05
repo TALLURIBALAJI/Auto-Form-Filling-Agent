@@ -332,3 +332,29 @@ This project is open source and available under the [MIT License](LICENSE).
 **Happy Coding! 🚀**
 
 *Made with ❤️ for students and developers*
+
+## One‑click start scripts (Windows PowerShell)
+
+To make running the app trivial on Windows, this repo includes PowerShell helper scripts that create virtual environments, install deps and launch both the backend and frontend in separate terminal windows.
+
+- `start-backend.ps1` — creates `backend\venv` (if missing), installs Python packages from `backend/requirements.txt` and runs the FastAPI server on port 8000.
+- `start-frontend.ps1` — runs `npm ci` in `frontend/` and starts the React dev server on port 3000.
+- `start-all.ps1` — launches both helpers in separate PowerShell windows (one command to start everything).
+- `start-docker.ps1` — runs `docker-compose up --build` from the repo root (requires Docker).
+
+Usage (PowerShell):
+```powershell
+cd "C:\Users\venki\OneDrive\Desktop\ROUTER\automatic-job-application-filler"
+# Start both frontend & backend in separate windows
+.\start-all.ps1
+
+# Or run individually (open two PowerShell windows):
+.\start-backend.ps1
+.\start-frontend.ps1
+```
+
+Notes:
+- Before running the backend, copy `backend/.env.example` to `backend/.env` and add your API keys (OpenRouter / Llama Cloud).
+- The frontend will use `frontend/.env` which contains `REACT_APP_API_URL=http://localhost:8000`. If you prefer, the project also sets a `proxy` in `frontend/package.json` so create-react-app will forward `/api` calls to the backend during development.
+
+If you want a single-click shortcut (Windows) I can add a `.lnk` or a `.bat` that runs `start-all.ps1`.

@@ -15,6 +15,8 @@ class FormFiller:
     def __init__(self):
         self.driver = None
         self.openrouter_key = os.getenv("OPENROUTER_API_KEY")
+        # Ensure llm attribute exists even if API key missing
+        self.llm = None
         
         # Initialize OpenRouter LLM
         if self.openrouter_key:

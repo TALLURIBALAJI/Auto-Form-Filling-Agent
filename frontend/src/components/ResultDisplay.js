@@ -44,12 +44,40 @@ const ResultDisplay = ({ result }) => {
           )}
         </Alert>
       ) : (
-        <Alert variant="danger" className="shadow-sm">
+        <Alert variant={result.ats_friendly === false ? "warning" : "danger"} className="shadow-sm">
           <Alert.Heading className="h5">
-            <i className="bi bi-exclamation-triangle-fill me-2"></i>
-            Error Occurred
+            <i className={`bi ${result.ats_friendly === false ? 'bi-file-earmark-x-fill' : 'bi-exclamation-triangle-fill'} me-2`}></i>
+            {result.ats_friendly === false ? '⚠️ PDF is NOT ATS-Friendly' : 'Error Occurred'}
           </Alert.Heading>
-          {result.error && <p className="mb-0">{result.error}</p>}
+          
+          {result.ats_friendly === false ? (
+            <div>
+              <p className="mb-3 fw-bold">{result.message || 'Your resume cannot be read by ATS systems'}</p>
+              {result.suggestions && result.suggestions.length > 0 && (
+                <div>
+                  <p className="mb-2 fw-semibold">How to fix:</p>
+                  <ListGroup variant="flush" className="bg-transparent">
+                    {result.suggestions.map((suggestion, index) => (
+                      <ListGroup.Item key={index} className="px-0 py-2 bg-transparent border-0">
+                        <i className="bi bi-arrow-right-circle text-warning me-2"></i>
+                        {suggestion}
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </div>
+              )}
+              <div className="alert alert-light mt-3 mb-0">
+                <small>
+                  <strong>💡 Quick Test:</strong> Open your PDF and try to select/copy text. 
+                  If you can't select text, it's not ATS-friendly!
+                </small>
+              </div>
+            </div>
+          ) : (
+            <div>
+              {result.error && <p className="mb-0">{result.error}</p>}
+            </div>
+          )}
         </Alert>
       )}
     </div>
