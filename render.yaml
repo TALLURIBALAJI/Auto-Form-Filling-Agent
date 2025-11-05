@@ -1,12 +1,7 @@
 services:
   - type: web
     name: auto-form-filler
-    env: python
-    region: oregon
+    runtime: python
     plan: free
-    branch: main
     buildCommand: bash build.sh
     startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
