@@ -134,6 +134,38 @@ npm start
 ```
 ✅ Frontend running at: `http://localhost:3000`
 
+### Option 3: AWS ECS Deployment (Production)
+
+#### Prerequisites
+- AWS CLI installed and configured
+- Docker installed
+
+#### Steps
+1. Clone and setup:
+```bash
+git clone <your-repo-url>
+cd auto-form-filling-agent
+```
+
+2. Setup AWS infrastructure:
+```bash
+# Export your API keys
+export OPENROUTER_API_KEY="your_openrouter_key_here"
+export LLAMA_CLOUD_API_KEY="your_llama_cloud_key_here"
+
+# Create infrastructure (ECR, ECS, Secrets)
+./aws/setup-infrastructure.sh
+```
+
+3. Deploy to AWS:
+```bash
+./aws/deploy.sh
+```
+
+✅ **Production deployment complete!**
+
+See `aws/README.md` for detailed deployment guide.
+
 ## 🎯 How to Use
 
 ### 1. Prepare Your Resume
@@ -157,18 +189,27 @@ npm start
 auto-form-filling-agent/
 ├── backend/
 │   ├── services/
-│   │   ├── resume_parser.py      # AI resume parsing
-│   │   ├── google_forms_service.py # Form submission
-│   │   └── form_analyzer.py      # Form analysis
-│   ├── main.py                   # FastAPI server
-│   ├── requirements.txt          # Python dependencies
-│   └── .env                      # API keys (create this)
+│   │   ├── resume_parser.py         # AI resume parsing
+│   │   └── google_forms_service.py  # Form submission
+│   ├── main.py                      # FastAPI server
+│   ├── requirements.txt             # Python dependencies
+│   ├── Dockerfile                   # Development container
+│   ├── Dockerfile.prod              # Production container
+│   └── .env                         # API keys (create this)
 ├── frontend/
 │   ├── src/
-│   │   ├── components/           # React components
-│   │   └── services/             # API calls
-│   ├── package.json              # Node dependencies
+│   │   ├── components/              # React components
+│   │   └── services/                # API calls
+│   ├── package.json                 # Node dependencies
+│   ├── Dockerfile                   # Frontend container
 │   └── public/
+├── aws/
+│   ├── setup-infrastructure.sh      # AWS infrastructure setup
+│   ├── deploy.sh                    # AWS deployment script
+│   ├── iam-policies.json            # Security policies
+│   └── README.md                    # AWS deployment guide
+├── docker-compose.yml               # Local development
+├── .env.example                     # Environment template
 └── README.md
 ```
 
