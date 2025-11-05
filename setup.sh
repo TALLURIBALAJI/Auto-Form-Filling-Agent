@@ -36,8 +36,8 @@ fi
 # Check environment file
 if [ ! -f "backend/.env" ]; then
     echo "🔑 Creating environment file template..."
-    echo "OPENROUTER_API_KEY=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" > backend/.env
-    echo "LLAMA_CLOUD_API_KEY=llx-IoYGvPCK84y5whiW2qgq9OFs3heTPQrMwvbCH0XQmvr750JF" >> backend/.env
+    echo "OPENROUTER_API_KEY=your_own_open_router_api_key" > backend/.env
+    echo "LLAMA_CLOUD_API_KEY=your_own_llama_cloud_api_key" >> backend/.env
     echo "⚠️  Please update backend/.env with your API keys"
 fi
 
