@@ -3,15 +3,14 @@
 
 set -o errexit
 
-echo "Installing backend dependencies..."
+# Install Python dependencies
 pip install --upgrade pip
 pip install -r backend/requirements.txt
 
-echo "Installing frontend dependencies..."
+# Install Node.js dependencies
 cd frontend
-npm ci --no-audit --no-fund
+npm install
 
-echo "Building frontend..."
+# Build React app
 npm run build
-
-echo "Build completed successfully!"
+cd ..
