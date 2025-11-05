@@ -18,7 +18,42 @@ A smart application that automatically fills Google Forms using your resume data
 
 ## 🚀 Quick Start Guide
 
-### Prerequisites
+### Option 1: Docker (Recommended)
+
+#### Prerequisites
+- Docker and Docker Compose installed
+- Git installed
+
+#### Steps
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd auto-form-filling-agent
+```
+
+2. Copy environment file:
+```bash
+cp .env.example .env
+```
+
+3. Add your API keys to `.env`:
+```
+OPENROUTER_API_KEY=your_openrouter_key_here
+LLAMA_CLOUD_API_KEY=your_llama_cloud_key_here
+```
+
+4. Run with Docker:
+```bash
+docker-compose up --build
+```
+
+✅ **Application running at:**
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:8000`
+
+### Option 2: Manual Setup
+
+#### Prerequisites
 - Python 3.8+ installed
 - Node.js 16+ installed
 - Git installed
@@ -192,6 +227,26 @@ pip install -r backend/requirements.txt
 - **Python Virtual Environments**: [docs.python.org](https://docs.python.org/3/tutorial/venv.html)
 
 ### Common Commands
+
+#### Docker Commands
+```bash
+# Start application
+docker-compose up
+
+# Start in background
+docker-compose up -d
+
+# Rebuild containers
+docker-compose up --build
+
+# Stop application
+docker-compose down
+
+# View logs
+docker-compose logs
+```
+
+#### Manual Setup Commands
 ```bash
 # Check Python version
 python --version
@@ -204,10 +259,6 @@ pip install package_name
 
 # Install Node package
 npm install package_name
-
-# See running processes
-# Mac/Linux: ps aux | grep python
-# Windows: tasklist | findstr python
 ```
 
 ### Project Customization
