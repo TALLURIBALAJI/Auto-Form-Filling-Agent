@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL 
-  ? `${process.env.REACT_APP_API_URL}/api` 
-  : '/api';
+// Force using relative path in production
+const API_BASE_URL = '/api';
+
+console.log('API Base URL:', API_BASE_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -11,6 +12,19 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+// Add response interceptor for debugging
+api.interceptors.response.use(
+  response => {
+    console.log('API Success:', response);
+    return response;
+  },
+  error => {
+    console.error('API Error:', error.message);
+    console.error('API Error Details:', error.response || error);
+    return Promise.reject(error);
+  }
+);
 
 export const parseResume = async (file) => {
   const formData = new FormData();
